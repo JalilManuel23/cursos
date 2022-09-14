@@ -146,6 +146,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#53a6bd",
     padding: 10,
     borderRadius: 12,
-    marginVertical: 15,
+    marginVertical: 10,
   },
 });
