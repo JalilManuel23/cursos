@@ -1,48 +1,124 @@
-
-import React, { useState } from 'react';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
-  SafeAreaView,
-  StatusBar,
   Button,
-  Component,
-} from "react-native";
-
-import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav'
+  TouchableHighlight,
+} from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function App() {
-  const [hidden] = useState(false);
-  
+
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        animated={true}
-        backgroundColor="#61dafb"
-        hidden={hidden}
-      />
-      
-      
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="Home"
+          component={HomeScreen}
+          options={{ 
+            title: 'Inicio',
+            headerStyle: {
+              backgroundColor: '#107590',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }} 
+        />
+        <Stack.Screen 
+          name="Login"
+          component={LoginScreen}
+          options={{ 
+            title: 'LogIn',
+            headerStyle: {
+              backgroundColor: '#107590',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}  
+        />
+        <Stack.Screen
+          name="SignIn"
+          component={SignInScreen} 
+          options={{ 
+            title: 'Registro',
+            headerStyle: {
+              backgroundColor: '#107590',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }} 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={styles.text} >Home Screen</Text>
+      <TouchableHighlight onPress={() => navigation.navigate('Login')}>
+        <View>
+          <Text style={styles.button}>Log In</Text>
+        </View>
+      </TouchableHighlight>
+    </View>
+  );
+}
+
+function LoginScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
       <View style={styles.container}>
         <Text style={styles.text}>Inicio de sesión</Text>
-        <TextInput 
-          editable 
-          maxLength={40}           
+        <TextInput
+          editable
+          maxLength={40}
           placeholder={'Correo electrónico'}
           style={styles.input}
         />
-        <TextInput 
-          editable 
-          maxLength={40}           
+        <TextInput
+          editable
+          maxLength={40}
           placeholder={'Contraseña'}
           style={styles.input}
         />
-        <Button title='Iniciar Sesión'
-        />
+        <TouchableHighlight onPress={() =>{}}>
+          <View>
+            <Text style={styles.button}>Iniciar Sesión</Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={() => navigation.navigate('SignIn')}>
+          <View>
+            <Text style={styles.button}>¿Aún no tienes cuenta? Registrate</Text>
+          </View>
+        </TouchableHighlight>
       </View>
-    </SafeAreaView>
+    </View>
+  );
+}
+
+function SignInScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={styles.text}>Registrarse</Text>
+      <TouchableHighlight onPress={() => navigation.navigate('Home')}>
+          <View>
+            <Text style={styles.button}>Regresar a Inicio</Text>
+          </View>
+        </TouchableHighlight>
+    </View>
   );
 }
 
@@ -54,7 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontSize: 55,
+    fontSize: 35,
   },
   input: {
     width: 250,
@@ -63,5 +139,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
     backgroundColor: '#e8e8e8',
+  },
+  button: {
+    alignItems: "center",
+    fontSize: 18,
+    backgroundColor: "#53a6bd",
+    padding: 10,
+    borderRadius: 12,
+    marginVertical: 15,
   },
 });
