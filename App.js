@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import {
   StyleSheet,
   Text,
@@ -7,6 +8,7 @@ import {
   TextInput,
   Button,
   TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -67,12 +69,12 @@ const Stack = createNativeStackNavigator();
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={styles.text} >Home Screen</Text>
-      <TouchableHighlight onPress={() => navigation.navigate('Login')}>
+      <Text style={styles.title} >Home Screen</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <View>
           <Text style={styles.button}>Log In</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -81,7 +83,7 @@ function LoginScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
       <View style={styles.container}>
-        <Text style={styles.text}>Inicio de sesión</Text>
+        <Text style={styles.title}>Inicio de sesión</Text>
         <TextInput
           editable
           maxLength={40}
@@ -93,17 +95,18 @@ function LoginScreen({ navigation }) {
           maxLength={40}
           placeholder={'Contraseña'}
           style={styles.input}
+          secureTextEntry={true}
         />
-        <TouchableHighlight onPress={() =>{}}>
+        <TouchableOpacity onPress={() =>{}}>
           <View>
             <Text style={styles.button}>Iniciar Sesión</Text>
           </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigation.navigate('SignIn')}>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
           <View>
             <Text style={styles.button}>¿Aún no tienes cuenta? Registrate</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -112,12 +115,12 @@ function LoginScreen({ navigation }) {
 function SignInScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={styles.text}>Registrarse</Text>
-      <TouchableHighlight onPress={() => navigation.navigate('Home')}>
+      <Text style={styles.title}>Registrarse</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <View>
             <Text style={styles.button}>Regresar a Inicio</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
     </View>
   );
 }
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
+  title: {
     fontSize: 35,
   },
   input: {
@@ -139,6 +142,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
     backgroundColor: '#e8e8e8',
+    borderRadius: 10,
   },
   button: {
     alignItems: "center",
